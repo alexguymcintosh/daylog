@@ -1,4 +1,6 @@
 #!/bin/sh
-# The one test command: the harness CI runs the same pytest line.
+# The one test command; CI runs the same pytest line. Exit 5 (no tests collected) passes until the first test lands.
 py=python3; [ -x .venv/bin/python ] && py=.venv/bin/python
-exec "$py" -m pytest --cov=daylog --cov-branch --cov-report=xml "$@"
+"$py" -m pytest --cov=daylog --cov-branch --cov-report=xml "$@"; rc=$?
+[ "$rc" -eq 5 ] && { echo "no tests yet"; exit 0; }
+exit "$rc"

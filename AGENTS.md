@@ -117,7 +117,7 @@ A rule enters Part A only if it names (a) the value it adds, (b) how it is enfor
 **Project:** daylog. **Stack:** Python 3.11+ standard library; pytest and pytest-cov for tests only. **Tracker:** none; plans live in `docs/plans/`. **Sibling repos:** none; the capture spool and the phone channel are reached through environment variables.
 
 - Build and run: no build step. `python -m daylog` once the first feature adds the package.
-- Test: `./test` (runs `python -m pytest --cov=daylog --cov-branch --cov-report=xml`, using `.venv` when present); coverage report at `coverage.xml`
+- Test: `./test` (runs `python -m pytest --cov=daylog --cov-branch --cov-report=xml` over `tests/`, using `.venv` when present; an empty suite passes until the first test lands); coverage report at `coverage.xml`. Local env: `uv venv .venv && uv pip install --python .venv/bin/python pytest pytest-cov`
 - Layout: see `docs/ARCHITECTURE.md`; the product spec is `SPEC.md`
 - Environment: `DAYLOG_SPOOL` (the capture spool directory) · `DAYLOG_NTFY_URL` (the phone channel, topic included). Values never enter a committed file.
 - **Never commit data.** No spool row, timeline, answer or ask leaves the owner's machines; the code is public, the day is private.
